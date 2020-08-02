@@ -1,0 +1,15 @@
+# goes in /etc/systemd/system/<project name>.service                                                                                                                    
+# don't forget to add proxy routing in nginx.conf  
+[Unit]
+Description=uWSGI instance to serve test project
+After=network.target
+
+[Service]
+User=alexhalme
+Group=www-data
+WorkingDirectory=/home/alexhalme/python/videotron
+Environment="PATH=/home/alexhalme/python/env_flask/bin"
+ExecStart=/home/alexhalme/python/env_flask/bin/uwsgi --ini /home/alexhalme/python/videotron/videotron.ini
+
+[Install]
+WantedBy=multi-user.target
